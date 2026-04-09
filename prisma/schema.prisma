@@ -1,0 +1,103 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  ADMIN
+  ENGINEER
+}
+
+enum ProjectStatus {
+  IN_PROGRESS
+  COMPLETED
+  PAUSED
+}
+
+enum CertStatus {
+  VALID
+  PENDING
+  EXPIRED
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  role      Role     @default(ENGINEER)
+  name      String
+  createdAt DateTime @default(now())
+
+  metrics Metric[]
+}
+
+model Project {
+  id        String        @id @default(uuid())
+  name      String
+  location  String?
+  status    ProjectStatus @default(IN_PROGRESS)
+  imageUrl  String?
+  createdAt DateTime      @default(now())
+
+  certifications ProjectCertification[]
+  metrics        Metric[]
+  files          File[]
+}
+
+model Certification {
+  id          String     @id @default(uuid())
+  name        String
+  level       String?
+  description String?
+  issuedAt    DateTime?
+  expiresAt   DateTime?
+  status      CertStatus @default(PENDING)
+  createdAt   DateTime   @default(now())
+
+  projects ProjectCertification[]
+  metrics  Metric[]
+}
+
+model ProjectCertification {
+  id              String        @id @default(uuid())
+  projectId       String
+  certificationId String
+  createdAt       DateTime      @default(now())
+
+  project       Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  certification Certification @relation(fields: [certificationId], references: [id], onDelete: Cascade)
+}
+
+model Metric {
+  id              String    @id @default(uuid())
+  value           Float
+  unit            String
+  description     String?
+  dateLogged      DateTime
+  projectId       String
+  certificationId String?
+  loggedById      String
+  createdAt       DateTime  @default(now())
+
+  project       Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  certification Certification? @relation(fields: [certificationId], references: [id])
+  loggedBy      User           @relation(fields: [loggedById], references: [id])
+  files         File[]
+}
+
+model File {
+  id         String   @id @default(uuid())
+  fileName   String
+  fileUrl    String
+  fileType   String
+  uploadedAt DateTime @default(now())
+  projectId  String
+  metricId   String?
+
+  project Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  metric  Metric?  @relation(fields: [metricId], references: [id])
+}
