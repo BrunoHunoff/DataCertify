@@ -1,9 +1,8 @@
-import Link from 'next/link'
-import { PlusCircle } from 'lucide-react'
 import { prisma } from '@/lib/prisma'
 import { StatCard } from '@/components/ui/StatCard'
 import { ProjectCard } from '@/components/projects/ProjectCard'
 import { NewProjectModal } from '@/components/projects/NewProjectModal'
+import { AddProjectCard } from '@/components/projects/AddProjectCard'
 
 export default async function ProjectsPage() {
   const [projects, totalCount] = await Promise.all([
@@ -48,19 +47,7 @@ export default async function ProjectsPage() {
           {projects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}
-
-          {/* Add new card */}
-          <Link
-            href="#"
-            className="group border-2 border-dashed border-[#c3c6d7] rounded-xl flex flex-col items-center justify-center p-12 hover:border-[#004ac6]/50 hover:bg-[#f2f3ff] transition-all cursor-pointer min-h-[220px]"
-            onClick={(e) => e.preventDefault()}
-          >
-            <div className="w-14 h-14 rounded-full bg-[#f2f3ff] flex items-center justify-center text-[#737686] group-hover:bg-[#dbe1ff] group-hover:text-[#004ac6] transition-all mb-4">
-              <PlusCircle className="w-7 h-7" />
-            </div>
-            <p className="font-bold text-[#131b2e] text-sm">Iniciar Nova Obra</p>
-            <p className="text-xs text-[#737686] mt-1">Configure um novo canteiro</p>
-          </Link>
+          <AddProjectCard />
         </div>
       )}
 
