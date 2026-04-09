@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed": "#ffdbcd",
+              "surface-tint": "#0053db",
+              "inverse-on-surface": "#eef0ff",
+              "primary-fixed-dim": "#b4c5ff",
+              "on-tertiary": "#ffffff",
+              "secondary-fixed": "#dbe1ff",
+              "inverse-primary": "#b4c5ff",
+              "outline-variant": "#c3c6d7",
+              "surface-dim": "#d2d9f4",
+              "tertiary-fixed-dim": "#ffb596",
+              "error-container": "#ffdad6",
+              "tertiary-container": "#bc4800",
+              "surface-container-highest": "#dae2fd",
+              "on-tertiary-fixed": "#360f00",
+              "tertiary": "#943700",
+              "surface-variant": "#dae2fd",
+              "on-tertiary-container": "#ffede6",
+              "on-secondary-container": "#394c84",
+              "secondary-fixed-dim": "#b4c5ff",
+              "on-primary": "#ffffff",
+              "on-tertiary-fixed-variant": "#7d2d00",
+              "on-primary-fixed-variant": "#003ea8",
+              "surface-container-low": "#f2f3ff",
+              "on-background": "#131b2e",
+              "on-primary-fixed": "#00174b",
+              "on-surface-variant": "#434655",
+              "surface-container": "#eaedff",
+              "outline": "#737686",
+              "primary-fixed": "#dbe1ff",
+              "primary": "#004ac6",
+              "surface": "#faf8ff",
+              "inverse-surface": "#283044",
+              "surface-container-high": "#e2e7ff",
+              "on-surface": "#131b2e",
+              "secondary-container": "#acbfff",
+              "primary-container": "#2563eb",
+              "background": "#faf8ff",
+              "on-error-container": "#93000a",
+              "on-primary-container": "#eeefff",
+              "on-error": "#ffffff",
+              "on-secondary": "#ffffff",
+              "on-secondary-fixed": "#00174b",
+              "secondary": "#495c95",
+              "error": "#ba1a1a",
+              "on-secondary-fixed-variant": "#31447b",
+              "surface-container-lowest": "#ffffff",
+              "surface-bright": "#faf8ff"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased overflow-hidden">
+<!-- Background Content (Blurred Metrics List) -->
+<div class="fixed inset-0 overflow-hidden pointer-events-none opacity-20 filter blur-sm">
+<header class="h-16 flex items-center px-8 border-b border-slate-200/20">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-lg" data-icon="construction">construction</span>
+</div>
+<h1 class="text-xl font-bold tracking-tighter">Obra Limpa</h1>
+</div>
+</header>
+<main class="p-12">
+<div class="mb-8">
+<h2 class="text-3xl font-extrabold tracking-tighter mb-2">Painel de Métricas</h2>
+<p class="text-slate-500">Edifício Horizon - Registro de Sustentabilidade</p>
+</div>
+<div class="bg-surface-container-lowest rounded-xl border border-slate-200/10 overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-highest">
+<tr>
+<th class="px-8 py-4 text-[10px] font-bold uppercase tracking-widest">Métrica</th>
+<th class="px-8 py-4 text-[10px] font-bold uppercase tracking-widest">Quantidade</th>
+<th class="px-8 py-4 text-[10px] font-bold uppercase tracking-widest">Data</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<tr>
+<td class="px-8 py-6 text-sm font-bold">Resíduos Gerados</td>
+<td class="px-8 py-6 text-sm">12.50 tons</td>
+<td class="px-8 py-6 text-sm">24 Out, 2023</td>
+</tr>
+<tr>
+<td class="px-8 py-6 text-sm font-bold">Água Consumida</td>
+<td class="px-8 py-6 text-sm">42.00 m³</td>
+<td class="px-8 py-6 text-sm">21 Out, 2023</td>
+</tr>
+<tr>
+<td class="px-8 py-6 text-sm font-bold">Energia Elétrica</td>
+<td class="px-8 py-6 text-sm">1.2 MWh</td>
+<td class="px-8 py-6 text-sm">18 Out, 2023</td>
+</tr>
+</tbody>
+</table>
+</div>
+</main>
+</div>
+<!-- Modal Overlay -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-slate-900/60 backdrop-blur-sm">
+<div class="bg-white w-full max-w-xl rounded-xl shadow-2xl overflow-hidden border border-slate-200/10 animate-in fade-in zoom-in duration-300">
+<!-- Modal Header -->
+<div class="px-8 py-6 border-b border-slate-100 flex justify-between items-center">
+<div>
+<h3 class="text-xl font-bold text-on-surface">Novo Lançamento</h3>
+<p class="text-[10px] font-bold uppercase tracking-widest text-primary">Resíduos Gerados • Edifício Horizon</p>
+</div>
+<button class="text-slate-400 hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<!-- Modal Form -->
+<form class="p-8">
+<div class="grid grid-cols-2 gap-6 mb-6">
+<div class="col-span-1">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Quantidade</label>
+<input class="w-full bg-surface-container-low border-none rounded-md px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none placeholder:text-slate-400" placeholder="0.00" step="0.01" type="number"/>
+</div>
+<div class="col-span-1">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Unidade</label>
+<select class="w-full bg-surface-container-low border-none rounded-md px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none appearance-none">
+<option>tons</option>
+<option>m³</option>
+<option>kg</option>
+<option>MWh</option>
+</select>
+</div>
+<div class="col-span-2">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Data do Lançamento</label>
+<div class="relative">
+<input class="w-full bg-surface-container-low border-none rounded-md px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none" type="date"/>
+</div>
+</div>
+</div>
+<div class="mb-8">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Nota Fiscal / Documento</label>
+<div class="border-2 border-dashed border-slate-200 bg-surface-container-low rounded-xl p-8 flex flex-col items-center justify-center text-center group hover:border-primary/40 hover:bg-surface-container transition-all cursor-pointer">
+<div class="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary" data-icon="cloud_upload">cloud_upload</span>
+</div>
+<p class="text-sm font-bold text-on-surface mb-1">Arraste e solte o arquivo aqui</p>
+<p class="text-[10px] text-slate-500 font-medium">Suporte: PDF, JPG, PNG (Máx 10MB)</p>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="flex-1 bg-surface-container-high text-on-secondary-container py-4 rounded-md font-bold text-xs hover:bg-surface-container-highest transition-colors active:scale-95" type="button">
+                        Cancelar
+                    </button>
+<button class="flex-[2] bg-gradient-to-r from-primary to-primary-container text-white py-4 rounded-md font-bold text-xs shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-all active:scale-[0.98]" type="submit">
+                        Salvar Lançamento
+                    </button>
+</div>
+</form>
+</div>
+</div>
+</body></html>

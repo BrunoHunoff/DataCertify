@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed": "#ffdbcd",
+              "surface-tint": "#0053db",
+              "inverse-on-surface": "#eef0ff",
+              "primary-fixed-dim": "#b4c5ff",
+              "on-tertiary": "#ffffff",
+              "secondary-fixed": "#dbe1ff",
+              "inverse-primary": "#b4c5ff",
+              "outline-variant": "#c3c6d7",
+              "surface-dim": "#d2d9f4",
+              "tertiary-fixed-dim": "#ffb596",
+              "error-container": "#ffdad6",
+              "tertiary-container": "#bc4800",
+              "surface-container-highest": "#dae2fd",
+              "on-tertiary-fixed": "#360f00",
+              "tertiary": "#943700",
+              "surface-variant": "#dae2fd",
+              "on-tertiary-container": "#ffede6",
+              "on-secondary-container": "#394c84",
+              "secondary-fixed-dim": "#b4c5ff",
+              "on-primary": "#ffffff",
+              "on-tertiary-fixed-variant": "#7d2d00",
+              "on-primary-fixed-variant": "#003ea8",
+              "surface-container-low": "#f2f3ff",
+              "on-background": "#131b2e",
+              "on-primary-fixed": "#00174b",
+              "on-surface-variant": "#434655",
+              "surface-container": "#eaedff",
+              "outline": "#737686",
+              "primary-fixed": "#dbe1ff",
+              "primary": "#004ac6",
+              "surface": "#faf8ff",
+              "inverse-surface": "#283044",
+              "surface-container-high": "#e2e7ff",
+              "on-surface": "#131b2e",
+              "secondary-container": "#acbfff",
+              "primary-container": "#2563eb",
+              "background": "#faf8ff",
+              "on-error-container": "#93000a",
+              "on-primary-container": "#eeefff",
+              "on-error": "#ffffff",
+              "on-secondary": "#ffffff",
+              "on-secondary-fixed": "#00174b",
+              "secondary": "#495c95",
+              "error": "#ba1a1a",
+              "on-secondary-fixed-variant": "#31447b",
+              "surface-container-lowest": "#ffffff",
+              "surface-bright": "#faf8ff"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- Simplified Top Bar -->
+<header class="fixed top-0 left-0 right-0 h-16 z-40 bg-white dark:bg-slate-900 border-b border-slate-200/50 dark:border-slate-800/50 flex items-center justify-between px-8 shadow-sm">
+<div class="flex items-center gap-2">
+<h1 class="text-xl font-bold tracking-tighter text-on-surface">Obra Limpa</h1>
+<span class="w-px h-6 bg-slate-200 mx-2"></span>
+<p class="font-inter text-[10px] font-bold tracking-widest text-slate-400 uppercase">Precision Tectonics</p>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative w-64 md:w-96 focus-within:ring-2 focus-within:ring-blue-500/20 rounded-lg transition-all hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-lg py-2 pl-10 pr-4 text-sm focus:ring-0 placeholder:text-slate-400" placeholder="Buscar projetos, endereços..." type="text"/>
+</div>
+<div class="h-8 w-px bg-slate-200/50 hidden sm:block"></div>
+<div class="flex items-center gap-3 cursor-pointer group">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-on-surface">Ricardo Silva</p>
+<p class="text-[10px] text-slate-500">Administrador</p>
+</div>
+<img alt="Avatar do Usuário" class="w-10 h-10 rounded-full object-cover ring-2 ring-primary/10 group-hover:ring-primary/30 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUMsHAjXMtYoebUN4WIZYoZlbj126Sg4dLOIY7d569vS9H3_yUtJVpDUO5YybvGpIriXmcT6CAJywT0y5QToYOvsg5d9hHZYRAfIrLqgCptlES4T-qUuuDyRoVkpynB5XzzooutgdYEew2vxuAJr5SDEZZUWcTVd47oOS8NB5zrDIKNml_-_nCgjmvtFXoH8OUiVb9JL0KLzQlPvpPo8uzxbCczF1SKR1ffBIylDzlMKolwtFkNMrtJJjoUGF9jzFu9Gfb_LV58Wu-"/>
+</div>
+</div>
+</header>
+<!-- Main Content Area (Full width now) -->
+<div class="min-h-screen flex flex-col pt-16">
+<!-- Page Canvas -->
+<main class="p-8 md:p-12 flex-1 max-w-7xl mx-auto w-full">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+<div>
+<h2 class="text-3xl font-headline font-bold text-on-surface tracking-tight mb-2">Projetos Ativos</h2>
+<p class="text-slate-500 font-body text-sm max-w-xl leading-relaxed">Gerencie suas obras com precisão técnica. Monitore o progresso e conformidade em tempo real.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 bg-surface-container-high text-on-secondary-container rounded-md font-semibold text-sm hover:bg-surface-container-highest transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                    Filtros
+                </button>
+<button class="px-6 py-2 bg-gradient-to-r from-primary to-primary-container text-white rounded-md font-semibold text-sm active:scale-95 duration-150 shadow-lg shadow-primary/20 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span>
+                    Novo Projeto
+                </button>
+</div>
+</div>
+<!-- Dashboard Stats (Simplified) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-slate-100/50">
+<p class="text-[0.6875rem] font-label font-bold text-slate-500 uppercase tracking-widest mb-1">Total de Obras</p>
+<p class="text-[3.5rem] font-headline font-bold text-primary leading-none -tracking-[0.02em]">12</p>
+</div>
+</div>
+<!-- Projects Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Project Card 1 -->
+<div class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-transparent hover:border-slate-200">
+<div class="h-48 relative overflow-hidden">
+<img alt="Edifício Horizon" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAY6lIdxXZh9P_MhsZdaO__hDXqiEOMQ0tMmG3w8AGQruxvAZNZTKSdWwWsn81778j8YbCRgG2m2kcxbW391z5TXZuwkXMRN5ptbZ6jgN1AyYoIXXwBzsDEfzDwczDA-7mfXt_nxsajcHu9JMxxDb1QT1wClx9h_0cgMfF9nFf9qULQB5crouxd-X04GWE_lJguXUg_MQ6G9jHET-vKu97nFULU1vrSO-w0zpKa-y1QSu2-x2fFH5fCHvFbq2EyWRbBcKZdZnghBCte"/>
+</div>
+<div class="p-6">
+<h3 class="text-lg font-headline font-bold text-on-surface mb-1">Edifício Horizon</h3>
+<p class="text-sm text-slate-500 mb-6 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                        Av. Paulista, 1200 - São Paulo, SP
+                    </p>
+<div class="flex items-center justify-between py-4 border-t border-slate-100">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">verified</span>
+<p class="text-sm font-bold text-on-surface">7 Certificados</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-transparent hover:border-slate-200">
+<div class="h-48 relative overflow-hidden">
+<img alt="Residencial Alpha" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO2l217PESvVJCuZuGLV0K5LZGHbYaGQ3AOrbgUzpmb18iQylXQPlixDD85ctECNBuNHFJ9x1xDGzWa0peixbd26W2Byzdu-Trydbf6vXA06FnaCncSFa0L9D6FPfZw1DrdtZcNs3cRuuzvqYZGmSlzVCjHUscXbN5ZJfp86TN_SFMOYqHCXoLJof9zzyDiEME0IXSIjwoTjrqCM5GEGImuSrL59yiKpxG_UI9mr6MtHmFnwkHEd6YS1B9yxkJrczlJlCT5gTgGNBm"/>
+</div>
+<div class="p-6">
+<h3 class="text-lg font-headline font-bold text-on-surface mb-1">Residencial Alpha</h3>
+<p class="text-sm text-slate-500 mb-6 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                        Al. Rio Negro, 450 - Barueri, SP
+                    </p>
+<div class="flex items-center justify-between py-4 border-t border-slate-100">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">verified</span>
+<p class="text-sm font-bold text-on-surface">3 Certificados</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Project Card 3 -->
+<div class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-transparent hover:border-slate-200">
+<div class="h-48 relative overflow-hidden">
+<img alt="Corporate Tower" class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARWf_YjIBRBE1FsbXrU5Bj3d8EE612aUyQnFPWH5T4GWzrlJcO2yXQ8DbEv-j36H9k_jFDknWraLCrz9mZENYzt6MIxeKhs6m2hiajSepfnTab83NrZHgzbxosSUFDE5pk9Zck0r_v0fzy51PzzhuP03p0FCnuopBK4vL7oBmSmglDn_XJlw1940Da-q6QlRyI55QvCA_9CWHBt6nxABHfLMEtX5LwB157OCxbEyTJw-F3LI-HrQpvVCRwAoC7vr5zs9po9u4blkDR"/>
+</div>
+<div class="p-6">
+<h3 class="text-lg font-headline font-bold text-on-surface mb-1">Corporate Tower</h3>
+<p class="text-sm text-slate-400 mb-6 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                        Rua Funchal, 98 - Itaim Bibi, SP
+                    </p>
+<div class="flex items-center justify-between py-4 border-t border-slate-100">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">verified</span>
+<p class="text-sm font-bold text-on-surface">1 Certificado</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Add Project Placeholder Card -->
+<div class="group border-2 border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center p-12 hover:border-primary/50 hover:bg-blue-50/30 transition-all cursor-pointer">
+<div class="w-16 h-16 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-blue-100 group-hover:text-primary transition-all mb-4">
+<span class="material-symbols-outlined text-3xl">add_circle</span>
+</div>
+<p class="font-bold text-on-surface text-sm">Iniciar Nova Obra</p>
+<p class="text-xs text-slate-400 mt-1">Configure um novo canteiro</p>
+</div>
+</div>
+<!-- Footer Meta -->
+<footer class="mt-20 pt-8 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between gap-4 text-slate-400">
+<p class="text-xs">© 2024 Obra Limpa - Gestão de Precisão Técnica</p>
+<div class="flex gap-6">
+<a class="text-xs hover:text-primary transition-colors" href="#">Termos de Serviço</a>
+<a class="text-xs hover:text-primary transition-colors" href="#">Privacidade</a>
+<a class="text-xs hover:text-primary transition-colors" href="#">Protocolos de Segurança</a>
+</div>
+</footer>
+</main>
+</div>
+</body></html>
