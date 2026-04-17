@@ -50,7 +50,7 @@ export default async function CertificadosPage({ params }: Props) {
             Painel de Ciclo de Vida de Certificação e Conformidade Regulatória
           </p>
         </div>
-        <div className="flex gap-3">
+        {/*<div className="flex gap-3">
           <Button
             variant="secondary"
             className="bg-[#eaedff] text-[#394c84] hover:bg-[#dbe1ff] flex items-center gap-2"
@@ -59,16 +59,7 @@ export default async function CertificadosPage({ params }: Props) {
             Exportar Relatório
           </Button>
           <NewCertificationModal projectId={projectId} />
-        </div>
-      </div>
-
-      {/* Stat */}
-      <div className="mb-8">
-        <StatCard
-          title="Total de Certificados"
-          value={project._count.certifications}
-          className="max-w-[220px]"
-        />
+        </div>*/}
       </div>
 
       {/* Table */}

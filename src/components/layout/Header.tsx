@@ -7,6 +7,7 @@ import { createClient } from '@/lib/supabase/client'
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -48,10 +49,6 @@ export function Header({ userName, userRole, isAdmin }: HeaderProps) {
             Obra Limpa
           </h1>
         </Link>
-        <span className="w-px h-5 bg-[#c3c6d7]" />
-        <p className="text-[10px] font-bold tracking-widest text-[#737686] uppercase hidden sm:block">
-          Precision Tectonics
-        </p>
       </div>
 
       {/* Right: user menu */}
@@ -75,12 +72,14 @@ export function Header({ userName, userRole, isAdmin }: HeaderProps) {
         />
 
         <DropdownMenuContent align="end" className="w-52">
-          <DropdownMenuLabel className="font-normal">
-            <div className="flex flex-col">
-              <p className="text-sm font-semibold">{userName}</p>
-              <p className="text-xs text-muted-foreground">{roleLabel}</p>
-            </div>
-          </DropdownMenuLabel>
+          <DropdownMenuGroup>
+            <DropdownMenuLabel className="font-normal">
+              <div className="flex flex-col">
+                <p className="text-sm font-semibold">{userName}</p>
+                <p className="text-xs text-muted-foreground">{roleLabel}</p>
+              </div>
+            </DropdownMenuLabel>
+          </DropdownMenuGroup>
           <DropdownMenuSeparator />
           {isAdmin && (
             <DropdownMenuItem
@@ -92,15 +91,14 @@ export function Header({ userName, userRole, isAdmin }: HeaderProps) {
               }
             />
           )}
-          <DropdownMenuItem
+          {/*<DropdownMenuItem
             render={
               <Link href="/perfil" className="flex items-center gap-2 cursor-pointer">
                 <UserCircle2 className="w-4 h-4" />
                 Meu Perfil
               </Link>
             }
-          />
-          <DropdownMenuSeparator />
+          />*/}
           <DropdownMenuItem
             onClick={handleSignOut}
             variant="destructive"

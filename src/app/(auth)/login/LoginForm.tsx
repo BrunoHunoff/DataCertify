@@ -38,9 +38,6 @@ export function LoginForm() {
         <h1 className="text-3xl font-bold tracking-tighter text-[#131b2e]">
           Obra Limpa
         </h1>
-        <p className="text-xs font-bold tracking-widest text-[#737686] uppercase mt-1">
-          Precision Tectonics
-        </p>
       </div>
 
       {/* Card */}

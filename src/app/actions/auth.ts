@@ -21,7 +21,7 @@ export async function inviteUserAction(formData: FormData) {
   if (!user) return { error: 'Não autenticado' }
 
   // Check caller is ADMIN
-  const caller = await prisma.user.findUnique({ where: { email: user.email! } })
+  const caller = await prisma.user.findUnique({ where: { id: user.id } })
   if (!caller || caller.role !== 'ADMIN') {
     return { error: 'Acesso negado. Apenas administradores podem convidar usuários.' }
   }
@@ -79,7 +79,7 @@ export async function deleteUserAction(userId: string) {
 
   if (!user) return { error: 'Não autenticado' }
 
-  const caller = await prisma.user.findUnique({ where: { email: user.email! } })
+  const caller = await prisma.user.findUnique({ where: { id: user.id } })
   if (!caller || caller.role !== 'ADMIN') {
     return { error: 'Acesso negado.' }
   }

@@ -3,13 +3,14 @@ import type {
   CertStatus,
   File,
   Metric,
+  MetricEntry,
   Project,
   ProjectCertification,
   Role,
   User,
 } from '@prisma/client'
 
-export type { CertStatus, Role }
+export type { CertStatus, Role, File }
 
 export type ProjectWithCounts = Project & {
   _count: { certifications: number }
@@ -20,9 +21,12 @@ export type ProjectWithCertifications = Project & {
   _count: { certifications: number }
 }
 
-export type MetricWithRelations = Metric & {
-  files: File[]
+export type MetricEntryWithRelations = MetricEntry & {
   loggedBy: User
+}
+
+export type MetricWithEntries = Metric & {
+  entries: MetricEntryWithRelations[]
   certification: Certification | null
 }
 

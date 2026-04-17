@@ -32,7 +32,7 @@ model User {
   name      String
   createdAt DateTime @default(now())
 
-  metrics Metric[]
+  metricEntries MetricEntry[]
 }
 
 model Project {
@@ -74,19 +74,31 @@ model ProjectCertification {
 
 model Metric {
   id              String    @id @default(uuid())
-  value           Float
+  name            String
+  goal            Float
   unit            String
-  description     String?
-  dateLogged      DateTime
   projectId       String
   certificationId String?
-  loggedById      String
   createdAt       DateTime  @default(now())
 
   project       Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
   certification Certification? @relation(fields: [certificationId], references: [id])
-  loggedBy      User           @relation(fields: [loggedById], references: [id])
-  files         File[]
+  entries       MetricEntry[]
+}
+
+model MetricEntry {
+  id         String   @id @default(uuid())
+  quantity   Float
+  date       DateTime
+  metricId   String
+  loggedById String
+  fileUrl    String?
+  fileName   String?
+  fileType   String?
+  createdAt  DateTime @default(now())
+
+  metric   Metric @relation(fields: [metricId], references: [id], onDelete: Cascade)
+  loggedBy User   @relation(fields: [loggedById], references: [id])
 }
 
 model File {
@@ -96,8 +108,6 @@ model File {
   fileType   String
   uploadedAt DateTime @default(now())
   projectId  String
-  metricId   String?
 
-  project Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  metric  Metric?  @relation(fields: [metricId], references: [id])
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
 }

@@ -2,8 +2,8 @@
 
 import { useState, useTransition } from 'react'
 import { toast } from 'sonner'
-import { Plus } from 'lucide-react'
-import { createMetricAction } from '@/app/actions/metrics'
+import { Pencil, Plus } from 'lucide-react'
+import { createMetricAction, updateMetricAction } from '@/app/actions/metrics'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -21,91 +21,98 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { FileUploadZone } from './FileUploadZone'
-import type { Certification } from '@prisma/client'
+import type { Metric } from '@prisma/client'
 
 interface NewMetricModalProps {
   projectId: string
-  certifications: Certification[]
+  certificationId: string
+  /** Pass to open in edit mode */
+  metric?: Metric
 }
 
-interface UploadedFile {
-  fileUrl: string
-  fileName: string
-  fileType: string
-}
-
-export function NewMetricModal({ projectId, certifications }: NewMetricModalProps) {
+export function NewMetricModal({ projectId, certificationId, metric }: NewMetricModalProps) {
+  const isEdit = !!metric
   const [open, setOpen] = useState(false)
-  const [unit, setUnit] = useState('kg')
-  const [certificationId, setCertificationId] = useState<string>('')
-  const [uploadedFile, setUploadedFile] = useState<UploadedFile | null>(null)
+  const [unit, setUnit] = useState(metric?.unit ?? 'kg')
   const [isPending, startTransition] = useTransition()
-
-  function resetForm() {
-    setUnit('kg')
-    setCertificationId('')
-    setUploadedFile(null)
-  }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const form = e.currentTarget
     const formData = new FormData(form)
     formData.set('unit', unit)
-    formData.set('certificationId', certificationId)
-
-    if (uploadedFile) {
-      formData.set('fileUrl', uploadedFile.fileUrl)
-      formData.set('fileName', uploadedFile.fileName)
-      formData.set('fileType', uploadedFile.fileType)
-    }
 
     startTransition(async () => {
-      const result = await createMetricAction(projectId, formData)
+      const result = isEdit
+        ? await updateMetricAction(metric!.id, projectId, certificationId, formData)
+        : await createMetricAction(projectId, certificationId, formData)
+
       if (result.error) {
         toast.error(result.error)
       } else {
-        toast.success('Lançamento salvo com sucesso!')
-        resetForm()
-        form.reset()
+        toast.success(isEdit ? 'Métrica atualizada!' : 'Métrica criada!')
+        if (!isEdit) { setUnit('kg'); form.reset() }
         setOpen(false)
       }
     })
   }
 
+  const trigger = isEdit ? (
+    <Button
+      variant="ghost"
+      size="sm"
+      className="text-[#737686] hover:text-[#004ac6] h-7 w-7 p-0"
+      title="Editar métrica"
+    >
+      <Pencil className="w-3.5 h-3.5" />
+    </Button>
+  ) : (
+    <Button className="bg-[#004ac6] hover:bg-[#003ea8] text-white shadow-lg shadow-[#004ac6]/20 flex items-center gap-2">
+      <Plus className="w-4 h-4" />
+      Nova Métrica
+    </Button>
+  )
+
   return (
-    <Dialog open={open} onOpenChange={(v) => { setOpen(v); if (!v) resetForm() }}>
-      <DialogTrigger
-        render={
-          <Button className="bg-[#004ac6] hover:bg-[#003ea8] text-white shadow-lg shadow-[#004ac6]/20 flex items-center gap-2">
-            <Plus className="w-4 h-4" />
-            Novo Lançamento
-          </Button>
-        }
-      />
-      <DialogContent className="max-w-lg">
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger render={trigger} />
+      <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold text-[#131b2e]">
-            Novo Lançamento
+            {isEdit ? 'Editar Métrica' : 'Nova Métrica'}
           </DialogTitle>
           <p className="text-[10px] font-bold uppercase tracking-widest text-[#004ac6]">
-            Resíduos Gerados • Lançamento de Métrica
+            Definição de Métrica
           </p>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-5 pt-2">
-          {/* Quantity + Unit */}
+          {/* Name */}
+          <div className="space-y-2">
+            <Label className="text-[10px] font-bold uppercase tracking-widest text-[#434655]">
+              Nome da Métrica *
+            </Label>
+            <Input
+              name="name"
+              defaultValue={metric?.name}
+              placeholder="ex: Madeira, Concreto, CO₂..."
+              required
+              className="bg-[#f2f3ff] border-none focus-visible:ring-[#004ac6]/30"
+            />
+          </div>
+
+          {/* Goal + Unit */}
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label className="text-[10px] font-bold uppercase tracking-widest text-[#434655]">
-                Quantidade *
+                Meta *
               </Label>
               <Input
-                name="value"
+                name="goal"
                 type="number"
                 step="0.01"
                 min="0"
+                defaultValue={metric?.goal}
                 placeholder="0,00"
                 required
                 className="bg-[#f2f3ff] border-none focus-visible:ring-[#004ac6]/30"
@@ -131,67 +138,6 @@ export function NewMetricModal({ projectId, certifications }: NewMetricModalProp
             </div>
           </div>
 
-          {/* Description */}
-          <div className="space-y-2">
-            <Label className="text-[10px] font-bold uppercase tracking-widest text-[#434655]">
-              Descrição / Tipo de Material
-            </Label>
-            <Input
-              name="description"
-              placeholder="ex: Resíduos de Concreto"
-              className="bg-[#f2f3ff] border-none focus-visible:ring-[#004ac6]/30"
-            />
-          </div>
-
-          {/* Date */}
-          <div className="space-y-2">
-            <Label className="text-[10px] font-bold uppercase tracking-widest text-[#434655]">
-              Data do Lançamento *
-            </Label>
-            <Input
-              name="dateLogged"
-              type="date"
-              required
-              className="bg-[#f2f3ff] border-none focus-visible:ring-[#004ac6]/30"
-            />
-          </div>
-
-          {/* Certification (optional) */}
-          {certifications.length > 0 && (
-            <div className="space-y-2">
-              <Label className="text-[10px] font-bold uppercase tracking-widest text-[#434655]">
-                Certificação Vinculada (opcional)
-              </Label>
-              <Select value={certificationId} onValueChange={(v) => setCertificationId(v ?? '')}>
-                <SelectTrigger className="bg-[#f2f3ff] border-none w-full">
-                  <SelectValue placeholder="Selecionar certificação..." />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="">Nenhuma</SelectItem>
-                  {certifications.map((c) => (
-                    <SelectItem key={c.id} value={c.id}>
-                      {c.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          )}
-
-          {/* File upload */}
-          <div className="space-y-2">
-            <Label className="text-[10px] font-bold uppercase tracking-widest text-[#434655]">
-              Nota Fiscal / Documento
-            </Label>
-            <FileUploadZone
-              projectId={projectId}
-              uploaded={!!uploadedFile}
-              uploadedName={uploadedFile?.fileName}
-              onUpload={(result) => setUploadedFile(result)}
-              onClear={() => setUploadedFile(null)}
-            />
-          </div>
-
           {/* Actions */}
           <div className="flex gap-3 pt-2">
             <Button
@@ -207,7 +153,7 @@ export function NewMetricModal({ projectId, certifications }: NewMetricModalProp
               disabled={isPending}
               className="flex-[2] bg-[#004ac6] hover:bg-[#003ea8] text-white shadow-md shadow-[#004ac6]/20"
             >
-              {isPending ? 'Salvando...' : 'Salvar Lançamento'}
+              {isPending ? 'Salvando...' : isEdit ? 'Atualizar' : 'Criar Métrica'}
             </Button>
           </div>
         </form>

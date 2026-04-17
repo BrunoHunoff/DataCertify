@@ -74,12 +74,7 @@ export function CertificationsTable({
               <TableHead className="text-[10px] font-bold uppercase tracking-widest text-[#737686] px-8">
                 Nome do Certificado
               </TableHead>
-              <TableHead className="text-[10px] font-bold uppercase tracking-widest text-[#737686] px-8">
-                Data de Emissão
-              </TableHead>
-              <TableHead className="text-[10px] font-bold uppercase tracking-widest text-[#737686] px-8">
-                Data de Validade
-              </TableHead>
+              
               <TableHead className="text-[10px] font-bold uppercase tracking-widest text-[#737686] px-8 text-center">
                 Status
               </TableHead>
@@ -109,25 +104,14 @@ export function CertificationsTable({
                       )}
                     </div>
                   </TableCell>
-                  <TableCell className="px-8 py-5 text-sm text-[#434655] font-medium">
-                    {formatDate(cert.issuedAt)}
-                  </TableCell>
-                  <TableCell className="px-8 py-5">
-                    <span
-                      className={`text-sm font-medium ${
-                        isExpiredDate ? 'text-[#ba1a1a] font-bold' : 'text-[#434655]'
-                      }`}
-                    >
-                      {formatDate(cert.expiresAt)}
-                    </span>
-                  </TableCell>
+                
                   <TableCell className="px-8 py-5 text-center">
                     <StatusBadge status={cert.status} />
                   </TableCell>
                   <TableCell className="px-8 py-5 text-right">
                     <div className="flex items-center justify-end gap-2">
                       <Link
-                        href={`/projetos/${projectId}/metricas?certId=${cert.id}`}
+                        href={`/projetos/${projectId}/certificados/${cert.id}/metricas`}
                         className="text-[10px] font-bold uppercase tracking-widest text-[#004ac6] hover:underline"
                       >
                         Ver Métricas
