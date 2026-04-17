@@ -8,13 +8,6 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
-import {
   Dialog,
   DialogContent,
   DialogHeader,
@@ -28,13 +21,12 @@ interface NewCertificationModalProps {
 
 export function NewCertificationModal({ projectId }: NewCertificationModalProps) {
   const [open, setOpen] = useState(false)
-  const [status, setStatus] = useState('PENDING')
   const [isPending, startTransition] = useTransition()
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
-    formData.set('status', status)
+    formData.set('status', 'PENDING')
 
     startTransition(async () => {
       const result = await createCertificationAction(projectId, formData)
@@ -109,22 +101,6 @@ export function NewCertificationModal({ projectId }: NewCertificationModalProps)
                 className="bg-[#f2f3ff] border-none focus-visible:ring-[#004ac6]/30"
               />
             </div>
-          </div>
-
-          <div className="space-y-2">
-            <Label className="text-[10px] font-bold uppercase tracking-widest text-[#434655]">
-              Status
-            </Label>
-            <Select value={status} onValueChange={(v) => { if (v) setStatus(v) }}>
-              <SelectTrigger className="bg-[#f2f3ff] border-none w-full">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="VALID">Válido</SelectItem>
-                <SelectItem value="PENDING">Pendente</SelectItem>
-                <SelectItem value="EXPIRED">Expirado</SelectItem>
-              </SelectContent>
-            </Select>
           </div>
 
           <div className="flex gap-3 pt-2">
