@@ -23,6 +23,8 @@ enum CertStatus {
   VALID
   PENDING
   EXPIRED
+  IN_PROGRESS
+  CANCELLED
 }
 
 model User {

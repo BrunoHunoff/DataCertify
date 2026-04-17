@@ -3,7 +3,7 @@
 import { useState, useTransition } from 'react'
 import Link from 'next/link'
 import { toast } from 'sonner'
-import { Trash2 } from 'lucide-react'
+import { ChevronDown, Trash2 } from 'lucide-react'
 import {
   Table,
   TableBody,
@@ -13,10 +13,16 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { StatusBadge } from '@/components/ui/StatusBadge'
 import { formatDate } from '@/lib/utils'
-import { deleteCertificationAction } from '@/app/actions/certifications'
-import type { Certification, ProjectCertification } from '@prisma/client'
+import { deleteCertificationAction, updateCertificationStatusAction } from '@/app/actions/certifications'
+import type { CertStatus, Certification, ProjectCertification } from '@prisma/client'
 
 type CertRow = ProjectCertification & { certification: Certification }
 
@@ -26,6 +32,13 @@ interface CertificationsTableProps {
 }
 
 const PAGE_SIZE = 10
+
+const STATUS_OPTIONS: { value: CertStatus; label: string }[] = [
+  { value: 'PENDING',     label: 'Pendente' },
+  { value: 'IN_PROGRESS', label: 'Em Andamento' },
+  { value: 'VALID',       label: 'Concluído' },
+  { value: 'CANCELLED',   label: 'Cancelado' },
+]
 
 export function CertificationsTable({
   certifications,
@@ -45,6 +58,17 @@ export function CertificationsTable({
         toast.error(result.error)
       } else {
         toast.success('Certificado removido.')
+      }
+    })
+  }
+
+  function handleStatusChange(certificationId: string, status: CertStatus) {
+    startTransition(async () => {
+      const result = await updateCertificationStatusAction(certificationId, projectId, status)
+      if (result.error) {
+        toast.error(result.error)
+      } else {
+        toast.success('Status atualizado.')
       }
     })
   }
@@ -74,7 +98,6 @@ export function CertificationsTable({
               <TableHead className="text-[10px] font-bold uppercase tracking-widest text-[#737686] px-8">
                 Nome do Certificado
               </TableHead>
-              
               <TableHead className="text-[10px] font-bold uppercase tracking-widest text-[#737686] px-8 text-center">
                 Status
               </TableHead>
@@ -86,8 +109,6 @@ export function CertificationsTable({
           <TableBody>
             {visible.map((row) => {
               const cert = row.certification
-              const isExpiredDate =
-                cert.expiresAt && new Date(cert.expiresAt) < new Date()
 
               return (
                 <TableRow
@@ -104,10 +125,31 @@ export function CertificationsTable({
                       )}
                     </div>
                   </TableCell>
-                
+
                   <TableCell className="px-8 py-5 text-center">
-                    <StatusBadge status={cert.status} />
+                    <DropdownMenu>
+                      <DropdownMenuTrigger
+                        disabled={isPending}
+                        className="inline-flex items-center gap-1 group/status focus:outline-none disabled:opacity-50"
+                      >
+                        <StatusBadge status={cert.status} />
+                        <ChevronDown className="w-3 h-3 text-[#737686] opacity-0 group-hover/status:opacity-100 transition-opacity" />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="center" className="min-w-[150px]">
+                        {STATUS_OPTIONS.map((opt) => (
+                          <DropdownMenuItem
+                            key={opt.value}
+                            disabled={cert.status === opt.value}
+                            onClick={() => handleStatusChange(cert.id, opt.value)}
+                            className="text-xs font-medium cursor-pointer"
+                          >
+                            {opt.label}
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </TableCell>
+
                   <TableCell className="px-8 py-5 text-right">
                     <div className="flex items-center justify-end gap-2">
                       <Link

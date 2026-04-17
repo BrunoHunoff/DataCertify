@@ -51,6 +51,31 @@ export async function createCertificationAction(
   }
 }
 
+export async function updateCertificationStatusAction(
+  certificationId: string,
+  projectId: string,
+  status: CertStatus,
+) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return { error: 'Não autenticado' }
+
+  const valid: CertStatus[] = ['PENDING', 'VALID', 'IN_PROGRESS', 'CANCELLED']
+  if (!valid.includes(status)) return { error: 'Status inválido.' }
+
+  try {
+    await prisma.certification.update({
+      where: { id: certificationId },
+      data: { status },
+    })
+    revalidatePath(`/projetos/${projectId}/certificados`)
+    return { success: true }
+  } catch (e) {
+    console.error('[updateCertificationStatusAction]', e)
+    return { error: 'Erro ao atualizar status.' }
+  }
+}
+
 export async function deleteCertificationAction(
   certificationId: string,
   projectId: string,
