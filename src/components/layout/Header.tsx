@@ -91,14 +91,14 @@ export function Header({ userName, userRole, isAdmin }: HeaderProps) {
               }
             />
           )}
-          {/*<DropdownMenuItem
+          <DropdownMenuItem
             render={
               <Link href="/perfil" className="flex items-center gap-2 cursor-pointer">
                 <UserCircle2 className="w-4 h-4" />
                 Meu Perfil
               </Link>
             }
-          />*/}
+          />
           <DropdownMenuItem
             onClick={handleSignOut}
             variant="destructive"

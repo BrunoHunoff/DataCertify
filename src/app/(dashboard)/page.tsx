@@ -51,14 +51,7 @@ export default async function ProjectsPage() {
         </div>
       )}
 
-      {/* Footer */}
-      <footer className="mt-20 pt-8 border-t border-[#c3c6d7]/30 flex flex-col md:flex-row items-center justify-between gap-4 text-[#737686]">
-        <p className="text-xs">© 2024 Obra Limpa — Gestão de Precisão Técnica</p>
-        <div className="flex gap-6">
-          <span className="text-xs">Termos de Serviço</span>
-          <span className="text-xs">Privacidade</span>
-        </div>
-      </footer>
+     
     </div>
   )
 }
