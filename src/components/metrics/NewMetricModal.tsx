@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from 'react'
 import { toast } from 'sonner'
-import { Pencil, Plus } from 'lucide-react'
+import { Loader2, Pencil, Plus } from 'lucide-react'
 import { createMetricAction, updateMetricAction } from '@/app/actions/metrics'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -151,8 +151,9 @@ export function NewMetricModal({ projectId, certificationId, metric }: NewMetric
             <Button
               type="submit"
               disabled={isPending}
-              className="flex-[2] bg-[#004ac6] hover:bg-[#003ea8] text-white shadow-md shadow-[#004ac6]/20"
+              className="flex-[2] bg-[#004ac6] hover:bg-[#003ea8] text-white shadow-md shadow-[#004ac6]/20 flex items-center gap-2"
             >
+              {isPending && <Loader2 className="w-4 h-4 animate-spin" />}
               {isPending ? 'Salvando...' : isEdit ? 'Atualizar' : 'Criar Métrica'}
             </Button>
           </div>

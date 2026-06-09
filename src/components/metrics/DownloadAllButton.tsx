@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Download } from 'lucide-react'
+import { Download, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 
@@ -47,7 +47,11 @@ export function DownloadAllButton({ projectId, certificationId }: DownloadAllBut
       disabled={loading}
       className="bg-[#eaedff] text-[#394c84] hover:bg-[#dbe1ff] flex items-center gap-1.5"
     >
-      <Download className="w-3.5 h-3.5" />
+      {loading ? (
+        <Loader2 className="w-3.5 h-3.5 animate-spin" />
+      ) : (
+        <Download className="w-3.5 h-3.5" />
+      )}
       {loading ? 'Gerando ZIP...' : 'Baixar tudo'}
     </Button>
   )

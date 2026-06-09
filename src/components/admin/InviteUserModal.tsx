@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from 'react'
 import { toast } from 'sonner'
-import { UserPlus } from 'lucide-react'
+import { Loader2, UserPlus } from 'lucide-react'
 import { inviteUserAction } from '@/app/actions/auth'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -139,8 +139,9 @@ export function InviteUserModal() {
             <Button
               type="submit"
               disabled={isPending}
-              className="flex-[2] bg-[#004ac6] hover:bg-[#003ea8] text-white shadow-md shadow-[#004ac6]/20"
+              className="flex-[2] bg-[#004ac6] hover:bg-[#003ea8] text-white shadow-md shadow-[#004ac6]/20 flex items-center gap-2"
             >
+              {isPending && <Loader2 className="w-4 h-4 animate-spin" />}
               {isPending ? 'Criando...' : 'Criar Usuário'}
             </Button>
           </div>

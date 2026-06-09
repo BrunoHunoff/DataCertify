@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
+import { Loader2 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -85,8 +86,9 @@ export function LoginForm() {
           <Button
             type="submit"
             disabled={loading}
-            className="w-full bg-[#004ac6] hover:bg-[#003ea8] text-white font-semibold py-6 rounded-lg shadow-lg shadow-[#004ac6]/20"
+            className="w-full bg-[#004ac6] hover:bg-[#003ea8] text-white font-semibold py-6 rounded-lg shadow-lg shadow-[#004ac6]/20 flex items-center justify-center gap-2"
           >
+            {loading && <Loader2 className="w-4 h-4 animate-spin" />}
             {loading ? 'Entrando...' : 'Entrar'}
           </Button>
         </form>

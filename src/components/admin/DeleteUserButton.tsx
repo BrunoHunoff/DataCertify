@@ -2,7 +2,7 @@
 
 import { useTransition } from 'react'
 import { toast } from 'sonner'
-import { Trash2 } from 'lucide-react'
+import { Loader2, Trash2 } from 'lucide-react'
 import { deleteUserAction } from '@/app/actions/auth'
 import { Button } from '@/components/ui/button'
 
@@ -36,7 +36,11 @@ export function DeleteUserButton({ userId, userName }: DeleteUserButtonProps) {
       onClick={handleDelete}
       className="text-[#737686] hover:text-[#ba1a1a] h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
     >
-      <Trash2 className="w-4 h-4" />
+      {isPending ? (
+        <Loader2 className="w-4 h-4 animate-spin" />
+      ) : (
+        <Trash2 className="w-4 h-4" />
+      )}
     </Button>
   )
 }
