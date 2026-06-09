@@ -5,6 +5,7 @@ import { prisma } from '@/lib/prisma'
 import { StatCard } from '@/components/ui/StatCard'
 import { MetricCard } from '@/components/metrics/MetricCard'
 import { NewMetricModal } from '@/components/metrics/NewMetricModal'
+import { DownloadAllButton } from '@/components/metrics/DownloadAllButton'
 
 interface Props {
   params: Promise<{ projectId: string; certificationId: string }>
@@ -68,10 +69,16 @@ export default async function MetricasPage({ params }: Props) {
             para auditoria desta certificação.
           </p>
         </div>
-        <NewMetricModal
-          projectId={projectId}
-          certificationId={certificationId}
-        />
+        <div className="flex items-center gap-2">
+          <DownloadAllButton
+            projectId={projectId}
+            certificationId={certificationId}
+          />
+          <NewMetricModal
+            projectId={projectId}
+            certificationId={certificationId}
+          />
+        </div>
       </div>
 
       {/* Metric cards */}
